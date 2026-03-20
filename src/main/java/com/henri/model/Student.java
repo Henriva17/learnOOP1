@@ -6,7 +6,7 @@ import com.henri.enums.WorkMode;
 import java.util.List;
 
 public class Student extends User{
-    public int studentId;
+    private int studentId;
     private String fieldOfStudy;
     private String educationLevel;
     private int graduationYear;
@@ -17,7 +17,6 @@ public class Student extends User{
     private String githubLink;
     private String portfolioLink;
     private String cvFilePath;
-    private String availability;
     public Student(){
 
     }
@@ -65,9 +64,6 @@ public class Student extends User{
     public String getCvFilePath(){
         return cvFilePath;
     }
-    public String getAvailability(){
-        return availability;
-    }
     public void setBio( String bio){
         this.bio = bio;
     }
@@ -85,9 +81,6 @@ public class Student extends User{
     }
     public void setCvFilePath(String cvFilePath){
        this.cvFilePath = cvFilePath;
-    }
-    public void setAvailability(String availability){
-       this.availability = availability;
     }
 
 

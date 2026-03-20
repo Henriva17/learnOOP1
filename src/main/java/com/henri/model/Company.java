@@ -5,7 +5,6 @@ import com.henri.enums.Role;
 public class Company extends User{
     private  int companyId;
     private String description;
-    private String industrySector;
     private String domainOfActivity;
     private String websiteLink;
     private int companySize;
@@ -25,9 +24,6 @@ public class Company extends User{
     public String getDescription(){
         return description;
     }
-    public  String getIndustrySector(){
-        return  industrySector;
-    }
     public String getDomainOfActivity(){
         return domainOfActivity;
     }
@@ -45,9 +41,6 @@ public class Company extends User{
     }
     public void setDescription(String description){
         this.description = description;
-    }
-    public  void setIndustrySector(String industrySector){
-        this.industrySector = industrySector;
     }
     public  void setDomainOfActivity(String domainOfActivity){
         this.domainOfActivity = domainOfActivity;
@@ -67,6 +60,6 @@ public class Company extends User{
     @Override
     public String toString() {
         return "Company{id=" + companyId + ", name='" + getFullName() +
-                "', industrySector='" + industrySector + "', verified=" + verified + "}";
+                "', domainOfActivity='" + domainOfActivity + "', verified=" + verified + "}";
     }
 }

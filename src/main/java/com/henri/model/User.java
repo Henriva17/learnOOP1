@@ -10,7 +10,6 @@ public class User {
      private String fullName;
      private String email;
      private String password;
-     //private String phoneNumber;
      private String location;
      private String profilePicture;
      private  String linkedinLinkPage;
@@ -19,19 +18,6 @@ public class User {
      private LocalDateTime createdAt;
 
     public User(){}
-    /*public User(int userId, String fullName, String email, String password, String location ){
-        if (fullName == null){
-            throw new RuntimeException("Name required");
-        }
-        if (email == null || !email.contains("@")){
-            throw new RuntimeException("Invalid email");
-        }
-        this.userId = userId;
-        this.password = password;
-        this.location = location;
-        this.status = Status.ACTIVE;
-        this.createdAt = LocalDateTime.now();
-    }*/
     public User(int userId, String fullName, String email, String password, String location, Role role ){
         if (fullName == null){
             throw new RuntimeException("Name required");

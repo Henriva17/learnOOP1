@@ -7,15 +7,14 @@ import com.henri.model.Student;
 import com.henri.model.User;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Application {
     public static void main(String[] args) {
 
         System.out.println("==============================================");
                 System.out.println("   INTERNSHIP PLATFORM - TRY TEST");
                 System.out.println("==============================================\n");
+
+        // ===== TEST STUDENT =====
         Student student = new Student(
                 1,
                 "Alice Dupont",
@@ -67,6 +66,11 @@ public class Application {
         System.out.println("Company Name: " + company.getFullName());
         System.out.println("Description: " + company.getDescription());
         System.out.println("Domain: " + company.getDomainOfActivity());
+        //Company bij default false we ga dat vervangen
+        company.setVerified(true);
+        // toString methode geroept
+        System.out.println(company.toString());
+        System.out.println(student.toString());
 
 
         // ===== TEST VALIDATION =====
