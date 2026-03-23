@@ -15,7 +15,7 @@ public class JobPosting {
     private String description;
     private JobType jobType;
     private WorkMode workMode;
-    private String location;
+    private String location; // location =>
     private List<String>requiredSkills;
     private String requiredEducationLevel;
     private LocalDate applicationDeadline;
@@ -45,7 +45,7 @@ public class JobPosting {
     }
     public int getPostingId()               { return jobPostingId; }
     public Company getCompany()             { return company; }
-    public String getJobTitle()               { return jobTitle; }
+    public String getJobTitle()             { return jobTitle; }
     public String getDescription()         { return description; }
     public JobType getJobType()            { return jobType; }
     public WorkMode getWorkMode()          { return workMode; }
@@ -59,10 +59,10 @@ public class JobPosting {
     public void setRequiredSkills(List<String> skills)      { this.requiredSkills = skills; }
     public void setRequiredEducationLevel(String level)     { this.requiredEducationLevel = level; }
     public void setPostingStatus(JobPostingStatus postingStatus)      { this.jobPostingStatus = postingStatus; }
-    public void setDeadline(LocalDate deadline)             { this.applicationDeadline = deadline; }
+    public void setDeadline(LocalDate applicationDeadline)             { this.applicationDeadline = applicationDeadline; }
 
     public boolean isJobOpen(){
-        return this.jobPostingStatus == jobPostingStatus.OPEN
+        return this.jobPostingStatus == JobPostingStatus.OPEN
                 && LocalDate.now().isBefore(applicationDeadline);
     }
 
