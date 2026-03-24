@@ -6,9 +6,7 @@ import com.henri.model.Company;
 import com.henri.model.Student;
 import com.henri.model.User;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Application {
 
@@ -18,13 +16,23 @@ public class Application {
         System.out.println("         INTERNSHIP PLATFORM ");
         System.out.println("====================================================");
 
+        // Lijst met ALLE gebruikers (User, Student, Company)
         List<User> registeredUsers = new ArrayList<>();
+
+        // Map met userId als key → snelle toegang tot gebruikers
+        Map<Long, User> userMap = new HashMap<>();
+
+        // Lijst enkel voor studenten
         List<Student> students = new ArrayList<>();
+
+        // Lijst enkel voor bedrijven
         List<Company> companies = new ArrayList<>();
 
         // ====================================================
         // 1. USERS REGISTER ON THE PLATFORM
         // ====================================================
+
+        // Alice registreert zich als gewone gebruiker
         User alice = new User(
                 1,
                 "Alice Dupont",
@@ -33,9 +41,17 @@ public class Application {
                 "Brussels",
                 Role.USER
         );
+
+        // Extra info toevoegen
         alice.setLinkedinLinkPage("https://linkedin.com/in/alice-dupont");
+
+        // Toevoegen aan lijst (voor overzicht)
         registeredUsers.add(alice);
 
+        // Toevoegen aan map (voor snelle opzoeking via ID)
+        userMap.put(alice.getUserId(), alice);
+
+        // Perlita registreert zich
         User perlita = new User(
                 2,
                 "Perlita Zuch",
@@ -44,9 +60,13 @@ public class Application {
                 "Brussels",
                 Role.USER
         );
-        perlita.setProfilePicture("/images/perlita.png");
-        registeredUsers.add(perlita);
 
+        perlita.setProfilePicture("/images/perlita.png");
+
+        registeredUsers.add(perlita);
+        userMap.put(perlita.getUserId(), perlita);
+
+        // Tech Solutions registreert eerst als gewone user
         User techSolutionsAccount = new User(
                 3,
                 "Tech Solutions Account",
@@ -55,8 +75,11 @@ public class Application {
                 "Antwerp",
                 Role.USER
         );
-        registeredUsers.add(techSolutionsAccount);
 
+        registeredUsers.add(techSolutionsAccount);
+        userMap.put(techSolutionsAccount.getUserId(), techSolutionsAccount);
+
+        // Radarwerk registreert
         User radarwerk = new User(
                 4,
                 "Radarwerk SRL",
@@ -65,20 +88,26 @@ public class Application {
                 "Gent",
                 Role.USER
         );
+
         registeredUsers.add(radarwerk);
+        userMap.put(radarwerk.getUserId(), radarwerk);
 
         System.out.println("\n--------------- REGISTERED USERS ---------------");
-        for (User user : registeredUsers) {
+
+        // We lopen door alle waarden van de map (dus alle users)
+        // Dit is een alternatief voor de lijst
+        for (User user : userMap.values()) {
             System.out.println(user);
         }
 
         // ====================================================
         // 2. ALICE BECOMES A STUDENT
         // ====================================================
-        System.out.println("\n--------------- ALICE BECOMES STUDENT ---------------");
+        System.out.println("\n--------------- ALICE WORDT STUDENT ---------------");
 
+        // We maken een NIEUW Student object met Alice haar gegevens
         alice = new Student(
-                (int)alice.getUserId(),
+                (int) alice.getUserId(),
                 alice.getFullName(),
                 alice.getEmail(),
                 alice.getPassword(),
@@ -90,30 +119,40 @@ public class Application {
                 "ULB"
         );
 
+        // Casting: alice is nu eigenlijk een Student object
+        // maar de variabele is van type User → daarom casten we
         Student aliceProfile = (Student) alice;
+
+        // Student-specifieke info instellen
         aliceProfile.setBio("Passionate student looking for a software engineering internship.");
         aliceProfile.setWorkMode(WorkMode.HYBRID);
         aliceProfile.setGithubLink("https://github.com/alicedupont");
         aliceProfile.setPortfolioLink("https://alicedupont.dev");
         aliceProfile.setCvFilePath("/cv/alice-dupont-cv.pdf");
+
+        // Skills toevoegen
         aliceProfile.setSkills(new ArrayList<>(Arrays.asList("Java", "Spring Boot", "SQL")));
         aliceProfile.addSkill("Git");
 
+        // Toevoegen aan studentenlijst
         students.add(aliceProfile);
-        //students.add((Student) alice);    since alice is already a student
 
-        // update registeredUsers list with the transformed account
-        replaceUserById(registeredUsers, alice);   // replaceUserById update olduser with new users Attributes
+        // Oude User vervangen door nieuwe Student in lijst
+        replaceUserById(registeredUsers, alice);
 
+        // Ook map updaten!
+        userMap.put(alice.getUserId(), alice);
+
+        // Print Alice (Student versie)
         System.out.println(alice);
 
         // ====================================================
-        // 2i. PERLITA BECOMES A STUDENT
+        // 3.  PERLITA BECOMES A STUDENT
         // ====================================================
-        System.out.println("\n--------------- PERLITA BECOMES STUDENT ---------------");
+        System.out.println("\n--------------- PERLITA WORDT STUDENT ---------------");
 
         perlita = new Student(
-                (int)perlita.getUserId(),
+                (int) perlita.getUserId(),
                 perlita.getFullName(),
                 perlita.getEmail(),
                 perlita.getPassword(),
@@ -125,7 +164,9 @@ public class Application {
                 "VUB"
         );
 
-        Student perlitaProfileStudent = (Student) perlita;      // To acces Students specific methods
+        // Casting nodig om Student-methodes te gebruiken
+        Student perlitaProfileStudent = (Student) perlita;
+
         perlitaProfileStudent.setBio("Interested in data, digital transformation, and internship opportunities.");
         perlitaProfileStudent.setWorkMode(WorkMode.REMOTE);
         perlitaProfileStudent.setGithubLink("https://github.com/perlitaz");
@@ -135,18 +176,17 @@ public class Application {
         perlitaProfileStudent.addSkill("Power BI");
 
         students.add(perlitaProfileStudent);
-        //students.add((Student) perlita); // since Perlita is already a student
 
-
-        // update registeredUsers list with the transformed account
+        // Update in lijst en map
         replaceUserById(registeredUsers, perlita);
+        userMap.put(perlita.getUserId(), perlita);
 
         System.out.println(perlita);
 
         // ====================================================
-        // 3. TECH SOLUTIONS ACCOUNT BECOMES A COMPANY
+        // 4. TECH SOLUTIONS ACCOUNT BECOMES A COMPANY
         // ====================================================
-        System.out.println("\n--------------- TECH SOLUTIONS BECOMES COMPANY ---------------");
+        System.out.println("\n--------------- TECH SOLUTIONS WORDT COMPANY ---------------");
 
         techSolutionsAccount = new Company(
                 (int) techSolutionsAccount.getUserId(),
@@ -160,26 +200,26 @@ public class Application {
         );
 
         Company techSolutionsProfile = (Company) techSolutionsAccount;
+
         techSolutionsProfile.setWebsiteLink("https://www.techsolutions.com");
         techSolutionsProfile.setCompanySize(150);
         techSolutionsProfile.setContactPersonName("Sophie Janssens");
         techSolutionsProfile.setVerified(true);
 
         companies.add(techSolutionsProfile);
-        //companies.add((Company) techSolutionsAccount); since techSol is already a company
 
-        // update registeredUsers list with the transformed account
         replaceUserById(registeredUsers, techSolutionsAccount);
+        userMap.put(techSolutionsAccount.getUserId(), techSolutionsAccount);
 
         System.out.println(techSolutionsAccount);
 
         // ====================================================
-        // 3. TECH SOLUTIONS ACCOUNT BECOMES A COMPANY
+        // 5. RADARWERK BECOMES A COMPANY
         // ====================================================
-        System.out.println("\n--------------- Radarwerk SRL BECOMES COMPANY ---------------");
+        System.out.println("\n--------------- RADARWERK WORDT COMPANY ---------------");
 
         radarwerk = new Company(
-                (int)radarwerk.getUserId(),
+                (int) radarwerk.getUserId(),
                 radarwerk.getFullName(),
                 radarwerk.getEmail(),
                 radarwerk.getPassword(),
@@ -188,22 +228,28 @@ public class Application {
                 "we unite young student with student jobs",
                 "HR"
         );
-        Company radarwerkProfile= (Company) radarwerk;
+
+        Company radarwerkProfile = (Company) radarwerk;
+
         radarwerkProfile.setVerified(true);
         radarwerkProfile.setWebsiteLink("https://radarwerk.be");
         radarwerkProfile.setContactPersonName("Erki");
         radarwerkProfile.setCompanySize(70);
 
         companies.add(radarwerkProfile);
-        //companies.add((Company) radarwerk);     since radarwerk is already a company
 
         replaceUserById(registeredUsers, radarwerk);
+        userMap.put(radarwerk.getUserId(), radarwerk);
 
         System.out.println(radarwerk);
 
+        // ====================================================
+        //  PRINT Various List
+        // ====================================================
 
+        System.out.println("\n--------------- STUDENTEN ---------------");
 
-        System.out.println("\n--------------- LIST OF STUDENTS ---------------");
+        // Enkel studenten tonen
         for (Student student : students) {
             System.out.println(
                     student.getFullName() + " | " +
@@ -212,7 +258,10 @@ public class Application {
                             student.getEducationLevel()
             );
         }
-        System.out.println("\n--------------- LIST OF COMPANIES ---------------");
+
+        System.out.println("\n--------------- BEDRIJVEN ---------------");
+
+        // Enkel bedrijven tonen
         for (Company company : companies) {
             System.out.println(
                     company.getFullName() + " | " +
@@ -223,11 +272,12 @@ public class Application {
         }
 
         // ====================================================
-        // 6. VALIDATION TESTS
+        // VALIDATION TESTS
         // ====================================================
-        System.out.println("\n--------------- VALIDATION TESTS ---------------");
+        System.out.println("\n--------------- VALIDATIE TEST ---------------");
 
         try {
+            // Fout: naam null en email ongeldig
             User invalidUser = new User(
                     5,
                     null,
@@ -236,38 +286,20 @@ public class Application {
                     "Ghent",
                     Role.USER
             );
-            System.out.println(invalidUser);
         } catch (IllegalArgumentException e) {
-            System.out.println("Validation error caught: " + e.getMessage());
-        }
-
-        try {
-            Student invalidStudent = new Student(
-                    6,
-                    "Invalid Student",
-                    "student@example.com",
-                    "pass123",
-                    "Namur",
-                    0,
-                    "",
-                    "Bachelor",
-                    2010,
-                    ""
-            );
-            System.out.println(invalidStudent);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Validation error caught: " + e.getMessage());
+            System.out.println("Fout gedetecteerd: " + e.getMessage());
         }
 
         System.out.println("\n====================================================");
-        System.out.println("        END OF INTERNSHIP PLATFORM");
+        System.out.println("        EINDE PLATFORM");
         System.out.println("====================================================");
     }
 
+    // Methode om een gebruiker in de lijst te vervangen op basis van ID
     private static void replaceUserById(List<User> users, User updatedUser) {
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getUserId() == updatedUser.getUserId()) {
-                users.set(i, updatedUser);
+                users.set(i, updatedUser); // vervang oude user door nieuwe (Student/Company)
                 return;
             }
         }

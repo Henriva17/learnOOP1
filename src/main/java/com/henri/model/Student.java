@@ -4,7 +4,9 @@ import com.henri.enums.Role;
 import com.henri.enums.WorkMode;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Student extends User {
     private long studentId;
@@ -13,7 +15,7 @@ public class Student extends User {
     private int graduationYear;
     private String university;
     private String bio;
-    private List<String> skills;
+    private Set<String> skills;
     private WorkMode workMode;
     private String githubLink;
     private String portfolioLink;
@@ -22,7 +24,7 @@ public class Student extends User {
     public Student() {
         super();
         setRole(Role.STUDENT);
-        this.skills = new ArrayList<>();
+        this.skills = new HashSet<>();          // TreeSet could also be useful but maybe the students entered the skilss form best to good
     }
 
     public Student(int userId, String fullName, String email, int studentId, String bio, List<String> skills) {
@@ -31,7 +33,7 @@ public class Student extends User {
 
         this.studentId = studentId;
         this.bio = bio;
-        this.skills = skills != null ? new ArrayList<>(skills) : new ArrayList<>();
+        this.skills = skills != null ? new HashSet<>(skills) : new HashSet<>();
         setRole(Role.STUDENT);
     }
 
@@ -51,7 +53,7 @@ public class Student extends User {
         this.educationLevel = educationLevel.trim();
         this.graduationYear = graduationYear;
         this.university = university.trim();
-        this.skills = new ArrayList<>();
+        this.skills = new HashSet<>();
         setRole(Role.STUDENT);
     }
 
@@ -109,7 +111,7 @@ public class Student extends User {
         return bio;
     }
 
-    public List<String> getSkills() {
+    public Set<String> getSkills() {
         return skills;
     }
 
@@ -134,7 +136,7 @@ public class Student extends User {
     }
 
     public void setSkills(List<String> skills) {
-        this.skills = skills != null ? new ArrayList<>(skills) : new ArrayList<>();
+        this.skills = skills != null ? new HashSet<>(skills) : new HashSet<>();
     }
 
     public void addSkill(String skill) {
