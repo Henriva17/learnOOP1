@@ -26,9 +26,17 @@ public class JobPosting {
     public JobPosting(){
 
     }
-    public JobPosting(int jobPostingId, Company company, String jobTitle,
-                      String description, JobType jobType, WorkMode workMode,
-                      String location,JobPostingStatus jobPostingStatus, String requiredEducationLevel ,LocalDate applicationDeadline ){
+    public JobPosting(
+                        JobPostingStatus jobPostingStatus,
+                        int jobPostingId,
+                      Company company,
+                      String jobTitle,
+                      String description,
+                      JobType jobType,
+                      WorkMode workMode,
+                      String location,
+                      String requiredEducationLevel ,
+                      LocalDate applicationDeadline ){
 
         if (jobTitle == null) throw new RuntimeException("Job Title required");
         if (company == null)  throw new RuntimeException("Company required");
@@ -43,7 +51,7 @@ public class JobPosting {
         //this.requiredSkills = requiredSkills;
         this.requiredEducationLevel = requiredEducationLevel;
         this.applicationDeadline = applicationDeadline;
-        this.jobPostingStatus = JobPostingStatus.OPEN;
+        this.jobPostingStatus = jobPostingStatus;
         this.createdAt = LocalDateTime.now();
     }
     public long getPostingId()               { return jobPostingId; }
@@ -63,6 +71,7 @@ public class JobPosting {
     public void setRequiredEducationLevel(String level)     { this.requiredEducationLevel = level; }
     public void setPostingStatus(JobPostingStatus postingStatus)      { this.jobPostingStatus = postingStatus; }
     public void setDeadline(LocalDate applicationDeadline)             { this.applicationDeadline = applicationDeadline; }
+
 
     public boolean isJobOpen(){
         return this.jobPostingStatus == JobPostingStatus.OPEN

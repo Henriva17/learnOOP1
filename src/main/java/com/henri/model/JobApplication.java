@@ -15,7 +15,10 @@ public class JobApplication {
     public JobApplication(){
 
     }
-    public JobApplication(int applicationId, Student student, JobPosting jobPosting, String motivationalLetter ){
+    public JobApplication(int applicationId,
+                          Student student,
+                          JobPosting jobPosting,
+                          String motivationalLetter ){
 
         if (student == null)    throw new IllegalArgumentException("Student required");
         if (jobPosting == null) throw new IllegalArgumentException("JobPosting required");
