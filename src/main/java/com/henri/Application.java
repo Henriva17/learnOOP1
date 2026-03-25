@@ -20,6 +20,7 @@ public class Application {
         userAminaToSave.setBirthDate(LocalDate.of(2002,1,1));
 
         userService.createNewUser(userAminaToSave);
+        userService.createNewUser(userAminaToSave);
 
         System.out.println(userService.getAllUsers());
 
