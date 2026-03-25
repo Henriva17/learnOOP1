@@ -14,13 +14,16 @@ public class Application {
         System.out.println("====================================================");
 
         UserService userService = new UserService();
+
         User userAminaToSave = new User();
+
         userAminaToSave.setFullName("AMINA");
         userAminaToSave.setEmail("amina@gmail.com");
         userAminaToSave.setBirthDate(LocalDate.of(2002,1,1));
 
         userService.createNewUser(userAminaToSave);
-        userService.createNewUser(userAminaToSave);
+
+        User userMikeToSave = new User();
 
         System.out.println(userService.getAllUsers());
 
