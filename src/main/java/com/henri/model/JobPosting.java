@@ -7,16 +7,17 @@ import com.henri.enums.WorkMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 public class JobPosting {
-    private int jobPostingId;
+    private long jobPostingId;
     private Company company;
     private String jobTitle;
     private String description;
     private JobType jobType;
     private WorkMode workMode;
     private String location; // location =>
-    private List<String>requiredSkills;
+    private Set<String> requiredSkills;
     private String requiredEducationLevel;
     private LocalDate applicationDeadline;
     private JobPostingStatus jobPostingStatus;
@@ -27,7 +28,7 @@ public class JobPosting {
     }
     public JobPosting(int jobPostingId, Company company, String jobTitle,
                       String description, JobType jobType, WorkMode workMode,
-                      String location, LocalDate applicationDeadline ){
+                      String location,JobPostingStatus jobPostingStatus, String requiredEducationLevel ,LocalDate applicationDeadline ){
 
         if (jobTitle == null) throw new RuntimeException("Job Title required");
         if (company == null)  throw new RuntimeException("Company required");
@@ -39,24 +40,26 @@ public class JobPosting {
         this.jobType = jobType;
         this.workMode = workMode;
         this.location = location;
+        //this.requiredSkills = requiredSkills;
+        this.requiredEducationLevel = requiredEducationLevel;
         this.applicationDeadline = applicationDeadline;
         this.jobPostingStatus = JobPostingStatus.OPEN;
         this.createdAt = LocalDateTime.now();
     }
-    public int getPostingId()               { return jobPostingId; }
+    public long getPostingId()               { return jobPostingId; }
     public Company getCompany()             { return company; }
     public String getJobTitle()             { return jobTitle; }
     public String getDescription()         { return description; }
     public JobType getJobType()            { return jobType; }
     public WorkMode getWorkMode()          { return workMode; }
     public String getLocation()            { return location; }
-    public List<String> getRequiredSkills(){ return requiredSkills; }
+    public Set<String> getRequiredSkills(){ return requiredSkills; }
     public LocalDate getDeadline()         { return applicationDeadline; }
     public JobPostingStatus getPostingStatus(){ return jobPostingStatus; }
     public LocalDateTime getCreatedAt()    { return createdAt; }
 
     public void setDescription(String description)          { this.description = description; }
-    public void setRequiredSkills(List<String> skills)      { this.requiredSkills = skills; }
+    public void setRequiredSkills(Set<String> skills)      { this.requiredSkills = skills; }
     public void setRequiredEducationLevel(String level)     { this.requiredEducationLevel = level; }
     public void setPostingStatus(JobPostingStatus postingStatus)      { this.jobPostingStatus = postingStatus; }
     public void setDeadline(LocalDate applicationDeadline)             { this.applicationDeadline = applicationDeadline; }

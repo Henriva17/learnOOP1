@@ -1,11 +1,10 @@
 package com.henri;
 
-import com.henri.enums.Role;
-import com.henri.enums.WorkMode;
-import com.henri.model.Company;
-import com.henri.model.Student;
-import com.henri.model.User;
+import com.henri.enums.*;
+import com.henri.model.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class Application {
@@ -27,6 +26,8 @@ public class Application {
 
         // Lijst enkel voor bedrijven
         List<Company> companies = new ArrayList<>();
+        // Lijst enkel voor Application
+        List<JobApplication> applications = new ArrayList<>();
 
         // ====================================================
         // 1. USERS REGISTER ON THE PLATFORM
@@ -131,7 +132,7 @@ public class Application {
         aliceProfile.setCvFilePath("/cv/alice-dupont-cv.pdf");
 
         // Skills toevoegen
-        aliceProfile.setSkills(new ArrayList<>(Arrays.asList("Java", "Spring Boot", "SQL")));
+        aliceProfile.setSkills(new HashSet<>(Arrays.asList("Java", "Spring Boot", "SQL")));
         aliceProfile.addSkill("Git");
 
         // Toevoegen aan studentenlijst
@@ -172,7 +173,7 @@ public class Application {
         perlitaProfileStudent.setGithubLink("https://github.com/perlitaz");
         perlitaProfileStudent.setPortfolioLink("https://portfolio-perlita.dev");
         perlitaProfileStudent.setCvFilePath("/cv/perlita-zuch-cv.pdf");
-        perlitaProfileStudent.setSkills(new ArrayList<>(Arrays.asList("Java", "Excel")));
+        perlitaProfileStudent.setSkills(new HashSet<>(Arrays.asList("Java", "Excel")));
         perlitaProfileStudent.addSkill("Power BI");
 
         students.add(perlitaProfileStudent);
@@ -244,10 +245,49 @@ public class Application {
         System.out.println(radarwerk);
 
         // ====================================================
+        //  JobPosting From radarwerkRadarwerk
+        // ====================================================
+
+
+        JobPosting javaInternship = new JobPosting(
+                301,
+                radarwerkProfile,
+                "Java Internship",
+                "Works with backend, OOP and API's",
+                JobType.INTERNSHIP,
+                WorkMode.HYBRID,
+                "Antwerpen",
+                JobPostingStatus.OPEN,
+                "Bachelor",
+                LocalDate.now()
+
+        );
+        javaInternship.setRequiredSkills(new HashSet<>(Arrays.asList("Java", "SQL")));
+
+
+
+        System.out.println("\n--------------- APPLICATION ---------------");
+        JobApplication aliceApplication = new JobApplication(
+                401,
+                aliceProfile,
+                javaInternship,
+                "I am highly motivated for this internship offers "
+        );
+        applications.add(aliceApplication);
+
+        JobApplication perlitaApplication = new JobApplication(
+                402,
+                perlitaProfileStudent,
+                javaInternship,
+                "I am highly motivated for this internship offers "
+        );
+        applications.add(perlitaApplication);
+
+        // ====================================================
         //  PRINT Various List
         // ====================================================
 
-        System.out.println("\n--------------- STUDENTEN ---------------");
+        System.out.println("\n--------------- STUDENT ---------------");
 
         // Enkel studenten tonen
         for (Student student : students) {
@@ -259,7 +299,7 @@ public class Application {
             );
         }
 
-        System.out.println("\n--------------- BEDRIJVEN ---------------");
+        System.out.println("\n--------------- COMPANY ---------------");
 
         // Enkel bedrijven tonen
         for (Company company : companies) {
@@ -269,6 +309,11 @@ public class Application {
                             company.getDescription() + " | " +
                             company.getContactPersonName()
             );
+        }
+        System.out.println("\n--------------- APPLICATION ---------------");
+        // Enkel voor Applications
+        for(JobApplication apps: applications){
+            System.out.println(apps);
         }
 
         // ====================================================

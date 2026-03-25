@@ -135,7 +135,7 @@ public class Student extends User {
         this.bio = bio;
     }
 
-    public void setSkills(List<String> skills) {
+    public void setSkills(Set<String> skills) {
         this.skills = skills != null ? new HashSet<>(skills) : new HashSet<>();
     }
 
