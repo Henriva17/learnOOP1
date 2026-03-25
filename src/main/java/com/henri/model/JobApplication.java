@@ -4,18 +4,18 @@ import com.henri.enums.ApplicationStatus;
 
 import java.time.LocalDateTime;
 
-public class Application {
-    private int applicationId;
+public class JobApplication {
+    private long applicationId;
     private Student student;
     private JobPosting jobPosting;
     private String motivationalLetter;
     private ApplicationStatus applicationStatus;
     private LocalDateTime appliedAt;
     private LocalDateTime updatedAt;
-    public Application(){
+    public JobApplication(){
 
     }
-    public Application(int applicationId, Student student, JobPosting jobPosting, String motivationalLetter ){
+    public JobApplication(int applicationId, Student student, JobPosting jobPosting, String motivationalLetter ){
 
         if (student == null)    throw new IllegalArgumentException("Student required");
         if (jobPosting == null) throw new IllegalArgumentException("JobPosting required");
@@ -29,7 +29,7 @@ public class Application {
         this.updatedAt         = LocalDateTime.now();
     }
     // getters
-    public int getApplicationId()       { return applicationId; }
+    public long getApplicationId()       { return applicationId; }
     public Student getStudent()         { return student; }
     public JobPosting getJobPosting()   { return jobPosting; }
     public String getMotivationalLetter() { return motivationalLetter; }
