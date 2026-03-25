@@ -22,7 +22,7 @@ public class JobApplication {
 
         if (student == null)    throw new IllegalArgumentException("Student required");
         if (jobPosting == null) throw new IllegalArgumentException("JobPosting required");
-        if (!jobPosting.isJobOpen()) throw new IllegalStateException("Cannot apply to a closed posting");
+        if (jobPosting.isJobOpen()) throw new IllegalStateException("Cannot apply to a closed posting");
         this.applicationId     = applicationId;
         this.student           = student;
         this.jobPosting        = jobPosting;
