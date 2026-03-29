@@ -54,7 +54,7 @@ public class JobPosting {
         this.jobPostingStatus = jobPostingStatus;
         this.createdAt = LocalDateTime.now();
     }
-    public long getPostingId()               { return jobPostingId; }
+    public long getJobPostingId()               { return jobPostingId; }
     public Company getCompany()             { return company; }
     public String getJobTitle()             { return jobTitle; }
     public String getDescription()         { return description; }

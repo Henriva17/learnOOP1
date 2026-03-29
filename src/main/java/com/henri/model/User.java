@@ -25,7 +25,7 @@ public class User {
         this.role = Role.USER;
     }
 
-    public User(int userId, String fullName, String email, Role role) {
+    public User(long userId, String fullName, String email, Role role) {
         validateUserId(userId);
         validateFullName(fullName);
         validateEmail(email);
@@ -39,13 +39,13 @@ public class User {
         this.createdAt = LocalDateTime.now();
     }
 
-    public User(int userId, String fullName, String email,String password, String location, Role role) {
+    public User(long userId, String fullName, String email,String password, String location, Role role) {
         validateUserId(userId);
         validateFullName(fullName);
         validateEmail(email);
-        validatePassword(password);
-        validateLocation(location);
-        validateRole(role);
+        //validatePassword(password);
+        //validateLocation(location);
+        //validateRole(role);
 
         this.userId = userId;
         this.fullName = fullName.trim();
@@ -57,7 +57,7 @@ public class User {
         this.createdAt = LocalDateTime.now();
     }
 
-    protected void validateUserId(int userId) {
+    protected void validateUserId(long userId) {
         if (userId <= 0) {
             throw new IllegalArgumentException("User id must be greater than 0.");
         }
@@ -75,11 +75,11 @@ public class User {
         }
     }
 
-    protected void validatePassword(String password) {
+    /*protected void validatePassword(String password) {
         if (password == null || password.length() < 4) {
             throw new IllegalArgumentException("Password must contain at least 4 characters.");
         }
-    }
+    }*/
 
     protected void validateLocation(String location) {
         if (location == null || location.trim().isEmpty()) {
@@ -136,6 +136,9 @@ public class User {
     public LocalDate getBirthDate() {
         return birthDate;
     }
+    public void setUserId(int userId){
+        this.userId = userId;
+    }
 
     public void setFullName(String fullName) {
         validateFullName(fullName);
@@ -150,7 +153,7 @@ public class User {
 
     public void setLocation(String location) {
         validateLocation(location);
-        this.location = location.trim();
+       this.location = location.trim();
     }
 
     public void setProfilePicture(String profilePicture) {

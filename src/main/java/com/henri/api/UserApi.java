@@ -1,5 +1,6 @@
 package com.henri.api;
 
+import com.henri.enums.Role;
 import com.henri.model.User;
 import com.henri.service.UserImplement;
 
@@ -19,7 +20,8 @@ public class UserApi {
 
     private UserImplement  userImplement;
     User AMINA = new User();
-
+    User Mike = new User(); // nieuw user toegevoet
+    User Alina = new User(1, "Alina", "alina@gmzil.com", Role.USER);
 
 
     public UserApi(UserImplement userImplement) {

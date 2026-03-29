@@ -4,19 +4,6 @@ import com.henri.dao.UserDAO;
 import com.henri.model.User;
 
 import java.util.List;
-
-/**
- * <blockquote><pre>
- * Author   : @Dountio
- * LinkedIn : @SidofDountio
- * GitHub   : @SidofDountio
- * Version  : V1.0
- * Email    : sidofdountio406@gmail.com
- * Since    : 3/25/26
- * </blockquote></pre>
- */
-
-
 public class UserImplement{
 
     private final UserDAO userDAO ;
@@ -30,11 +17,11 @@ public class UserImplement{
         System.out.println("Saving user");
         return this.userDAO.createNewUser(user);
     }
-
-    public List<User> getAllUsers() {
+    public void deleteUser(User user) {
+        System.out.println("Deleted existing user");
+        userDAO.deleteUser(user);
+    }
+    public List<User> getAllUsers(){
         return userDAO.getAllUsers();
     }
-
-
-
 }
