@@ -11,11 +11,13 @@ public class Company extends User{
     private String contactPersonName;    // vraagje @sidof
     private boolean verified;
     public Company(){}
-    public Company(int userId, String fullName, String email, String password, String location, Role role, int companyId, String companyName, String description, String domainOfActivity) {
+    public Company(int userId, String fullName, String email, String password, String location, Role role, int companyId, String description, String domainOfActivity,String websiteLink, int companySize) {
         super(userId, fullName, email, password, location, Role.COMPANY);
         this.companyId        = companyId;
         this.description      = description;
         this.domainOfActivity = domainOfActivity;
+        this.websiteLink = websiteLink;
+        this.companySize = companySize;
         this.verified         = false;
     }
     public int getCompanyId(){
@@ -59,7 +61,15 @@ public class Company extends User{
     }
     @Override
     public String toString() {
-        return "Company{id=" + companyId + ", name='" + getFullName() +
-                "', domainOfActivity='" + domainOfActivity + "', verified=" + verified + "}";
+        return "\n========== Company PROFILE ==========" +
+                "\nCompany Id        : " + companyId +
+                "\nFull Name         : " + getFullName() +
+                "\nEmail             : " + getEmail() +
+                "\nDomainOfActivity  : " + (domainOfActivity != null ? domainOfActivity : "not specified") +
+                "\nVerified          : " + verified +
+                "\nWebsiteLink       : " + websiteLink +
+                "\nContactPersonName : " + (contactPersonName != null ? contactPersonName : "not specified") +
+                "\nCompanySize       : " + companySize +
+                "\n==================================";
     }
 }

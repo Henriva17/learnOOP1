@@ -17,7 +17,7 @@ public class UserService implements UserDAO {
     public User createNewUser(User user) {
         for(User u : USER_LIST){
             if(user.getEmail().equals(u.getEmail())){
-                System.out.println("Email already exist" + u.getEmail());
+                System.out.println("Email already exist " + u.getEmail());
                 return u;
             }
         }
@@ -51,7 +51,7 @@ public class UserService implements UserDAO {
         return student;
     }
 
-    public Company promoteToCompany(User user, int companyId, String description, String domain) {
+    public Company promoteToCompany(User user, int companyId, String description, String domain, String websiteLink, int companySize) {
         if (!USER_LIST.contains(user)) {
             throw new IllegalArgumentException("User not found in the system.");
         }
@@ -66,11 +66,15 @@ public class UserService implements UserDAO {
                 user.getLocation(),
                 Role.COMPANY,
                 companyId,
-                user.getFullName(),
                 description,
-                domain
+                domain,
+                websiteLink,
+                companySize
+
         );
 
+        //private String websiteLink;
+        //    private int companySize
         USER_LIST.set(index, company);
         System.out.println(user.getFullName() + " promoted to Company.");
         return company;

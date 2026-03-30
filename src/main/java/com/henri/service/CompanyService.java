@@ -6,6 +6,7 @@ import com.henri.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CompanyService implements CompanyDAO {
 
@@ -19,10 +20,27 @@ public class CompanyService implements CompanyDAO {
     public Company createCompany(Company company) {
         return (Company) userService.createNewUser(company);
     }
-
     @Override
-    public void updateCompany(Company company) {
-        userService.updateUser(company);
+    public void updateCompany(Company updatedCompany) {
+
+        for (User user : userService.getAllUsers()) {
+            if (user instanceof Company) {
+                Company existing = (Company) user;
+
+                if (existing.getCompanyId() == updatedCompany.getCompanyId()) {
+
+                    existing.setFullName(updatedCompany.getFullName());
+                    existing.setEmail(updatedCompany.getEmail());
+                    existing.setDomainOfActivity(updatedCompany.getDomainOfActivity());
+                    existing.setVerified(updatedCompany.isVerified());
+
+                    System.out.println("Company with name " + updatedCompany.getFullName() + " has been updated");
+                    return;
+                }
+            }
+        }
+
+        throw new RuntimeException("Company does not exist");
     }
 
     @Override
@@ -32,11 +50,10 @@ public class CompanyService implements CompanyDAO {
 
     @Override
     public List<Company> getAllCompanies() {
-        List<Company> list = userService.getAllUsers().stream()
+        return userService.getAllUsers().stream()
                 .filter(user -> user instanceof Company)
                 .map(user -> (Company) user)
-                .toList();
-        return list;
+                .collect(Collectors.toList());
     }
 
     @Override

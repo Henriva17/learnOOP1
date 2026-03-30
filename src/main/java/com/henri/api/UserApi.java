@@ -20,9 +20,7 @@ public class UserApi {
 
     private UserImplement  userImplement;
     User AMINA = new User();
-    User Mike = new User(); // nieuw user toegevoet
-    User Alina = new User(1, "Alina", "alina@gmzil.com", Role.USER);
-
+    //User Mike = new User();
 
     public UserApi(UserImplement userImplement) {
         this.userImplement = userImplement;

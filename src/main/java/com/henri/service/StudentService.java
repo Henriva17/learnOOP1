@@ -25,10 +25,24 @@ public class StudentService implements StudentDAO {
             return (Student) userService.createNewUser(student);
         }
 
-        @Override
-        public void updateStudent(Student student) {
-            userService.updateUser(student);
+    @Override
+    public void updateStudent(Student updatedStudent) {
+        for (User user : userService.getAllUsers()) {
+            if (user instanceof Student) {
+                Student student = (Student) user;
+                if (student.getStudentId() == updatedStudent.getStudentId()) {
+                    student.setFullName(updatedStudent.getFullName());
+                    student.setEmail(updatedStudent.getEmail());
+                    student.setSkills(updatedStudent.getSkills());
+                    student.setWorkMode(updatedStudent.getWorkMode());
+
+                    System.out.println("Student with name " + updatedStudent.getFullName() + " has been updated");
+                    return;
+                }
+            }
         }
+        throw new RuntimeException("Student does not exist");
+    }
 
         @Override
         public void deleteStudent(Student student) {
